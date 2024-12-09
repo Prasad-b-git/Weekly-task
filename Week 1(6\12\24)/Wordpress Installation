@@ -69,3 +69,10 @@ a2ensite wordpress.conf
 a2dissite 000-default.conf
 a2enmod rewrite
 systemctl restart apache2`
+                                                ##Completed WordPress Installation##
+
+#Landing page
+link: https://prwp.gpuoncloud.com/
+
+#admin page
+link: https://prwp.gpuoncloud.com/wp-admin
