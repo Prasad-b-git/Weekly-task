@@ -1,0 +1,71 @@
+# Installation Guide for WordPress.
+
+This document provides a step-by-step guide to install WordPress.
+
+---
+
+## 1. Install WordPress
+
+### Install Apache
+
+apt install apache2 -y
+systemctl enable apache2
+systemctl start apache2
+
+Install Compatible PHP Version
+sudo apt install php7.4-mysql php7.4-xml php7.4-mbstring -y
+
+##Install mysql
+sudo apt install mysql-server -y
+sudo systemctl start mysql
+sudo systemctl enable mysql
+mysql -u root -p
+
+##creating Database for wordpress
+CREATE DATABASE wordpress_db;
+CREATE USER 'wp24_user'@'localhost' IDENTIFIED BY '123456';
+GRANT ALL PRIVILEGES ON wordpress_db.* TO 'wp24_user'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+##WordPress installation
+wget https://wordpress.org/latest.tar.gz
+tar -xvzf latest.tar.gz
+sudo mv wordpress/* /var/www/html/
+sudo chown -R www-data:www-data /var/www/html/
+sudo chmod -R 755 /var/www/html/
+
+##config Wordpress
+sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+sudo vim /var/www/html/wp-config.php
+
+Add the attiributes
+define('DB_NAME', 'wordpress_db');
+define('DB_USER', 'wp24_user');
+define('DB_PASSWORD', '123456');
+define('DB_HOST', 'localhost');
+
+##creating and Configuring the file in the apache folder
+sudo vim /etc/apache2/sites-available/wordpress.conf
+
+##adding the following
+<VirtualHost *:443>
+    ServerAdmin wp@localhost
+    ServerName prwp.gpuoncloud.com
+    ServerAlias www.prwp.gpuoncloud.com
+    DocumentRoot /var/www/html/wordpress
+    <Directory /var/www/html/wordpress>
+        Options FollowSymLinks
+        AllowOverride All
+        DirectoryIndex index.php
+        Require all granted
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+##Enable Site and Rewrite Module
+a2ensite wordpress.conf
+a2dissite 000-default.conf
+a2enmod rewrite
+systemctl restart apache2`
