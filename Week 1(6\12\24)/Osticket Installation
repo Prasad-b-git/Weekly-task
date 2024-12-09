@@ -61,5 +61,8 @@ sudo systemctl restart apache2
 
                                                       ###Completed OsTicket Installation###
 
-CLient page
+##CLient page
+link : protgpuoncloud.com
 
+##Admin page
+Link : protgpuoncloud.com/scp
