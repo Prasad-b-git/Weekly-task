@@ -127,7 +127,3 @@ Feel free to fork this repository and submit pull requests for improvements or b
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-
----
-
-Let me know if you need help customizing or extending this `README.md`! 😊
