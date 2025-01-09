@@ -1,6 +1,3 @@
-Here’s a detailed **README.md** file for your Terraform project:  
-
-```markdown
 # Modularized AWS Infrastructure with Terraform
 
 This project involves designing and deploying a modularized infrastructure on AWS using Terraform. The setup includes networking, security groups, EC2 instances, and an Application Load Balancer. Terraform's state is managed using an S3 bucket for scalability and maintainability.
@@ -32,6 +29,17 @@ This project involves designing and deploying a modularized infrastructure on AW
 3. An SSH key pair created in the AWS console (e.g., `ngnix-key`).
 
 ---
+
+## Installation and Setup
+
+### Step 1: Install AWS CLI
+Follow the official documentation to install the AWS CLI:
+[Installing AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+
+### Step 2: Configure AWS CLI
+Run the following command to configure your AWS CLI with your credentials:
+```bash
+aws configure
 
 ## Installation and Setup
 
