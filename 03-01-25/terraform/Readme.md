@@ -140,7 +140,12 @@ After successful deployment, Terraform will output:
 - Security group IDs
 - Instance IDs
 - Application Load Balancer DNS
+---
+## AWS Architecture
 
+Below is a high-level diagram of the AWS architecture deployed using this project:
+
+![AWS Architecture](https://via.placeholder.com/1024x768.png?text=AWS+Architecture+Diagram)
 ---
 
 ## Best Practices
