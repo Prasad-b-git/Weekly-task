@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4f46e5;
+      --primary-light: #818cf8;
+      --primary-dark: #3730a3;
+      --secondary-color: #ec4899;
+      --text-color: #1f2937;
+      --text-light: #6b7280;
+      --light-gray: #f3f4f6;
+      --gray: #e5e7eb;
+      --white: #ffffff;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      --radius: 16px;
+      --input-radius: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #ddd6fe 0%, #c7d2fe 50%, #bfdbfe 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+    }
+
+    .header {
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 12px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      color: var(--text-color);
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    .card {
+      background-color: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card:hover {
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px);
+    }
+
+    .card-header {
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+      color: var(--white);
+      padding: 22px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 60%);
+      transform: rotate(30deg);
+    }
+
+    .card-header h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+
+    .card-body {
+      padding: 35px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .form-group:last-of-type {
+      margin-bottom: 30px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-color);
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 1rem;
+      border: 2px solid var(--gray);
+      border-radius: var(--input-radius);
+      transition: all 0.3s ease;
+      outline: none;
+      color: var(--text-color);
+      background-color: var(--light-gray);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+      background-color: var(--white);
+    }
+
+    .form-control::placeholder {
+      color: var(--text-light);
+      opacity: 0.7;
+    }
+
+    .icon-input {
+      position: relative;
+    }
+
+    .icon-input .form-control {
+      padding-left: 48px;
+    }
+
+    .icon-input i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary-light);
+      font-size: 18px;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .icon-input .form-control:focus + i {
+      color: var(--primary-color);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+      color: var(--white);
+      border: none;
+      border-radius: var(--input-radius);
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      box-shadow: 0 7px 15px rgba(79, 70, 229, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .footer {
+      margin-top: 35px;
+      color: var(--text-color);
+      font-size: 1rem;
+      position: relative;
+      padding-top: 18px;
+      font-weight: 500;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      border-radius: 2px;
+    }
+
+    /* Animation for form submission */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    .submit-animation {
+      animation: pulse 0.6s ease;
+    }
+
+    /* Form validation styling */
+    .form-control:valid {
+      border-color: #10b981;
+    }
+
+    /* Tooltip styles */
+    .tooltip {
+      position: relative;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: var(--text-color);
+      color: var(--white);
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.85rem;
+      font-weight: normal;
+    }
+
+    .tooltip .tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: var(--text-color) transparent transparent transparent;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      .card-body {
+        padding: 25px 20px;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .card-header h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>AWS Project</h1>
+      <p>We'd love to hear from you</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2>Contact Us</h2>
+      </div>
+      <div class="card-body">
+        <form action="/dev" method="post" id="contactForm">
+          <div class="form-group icon-input">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" class="form-control" placeholder="Enter your first name" required>
+            <i class="fas fa-user"></i>
+          </div>
+
+          <div class="form-group icon-input">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" class="form-control" placeholder="Enter your last name" required>
+            <i class="fas fa-user-tag"></i>
+          </div>
+
+          <div class="form-group icon-input tooltip">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+            <i class="fas fa-envelope"></i>
+            <span class="tooltiptext">We'll never share your email with anyone else</span>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="4" class="form-control" placeholder="Type your message here..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn" id="submitBtn">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer">
+      An AWS Project by Prasad Bandagale
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Add hover effect for input fields
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        input.closest('.form-group').style.transform = 'translateY(-3px)';
+      });
+      
+      input.addEventListener('blur', () => {
+        input.closest('.form-group').style.transform = 'translateY(0)';
+      });
+    });
+    
+    // Add submit animation
+    form.addEventListener('submit', (e) => {
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      submitBtn.classList.add('submit-animation');
+      
+      // This timeout would be removed in production - just for demo
+      setTimeout(() => {
+        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Message Sent!';
+        submitBtn.style.background = 'linear-gradient(90deg, #10b981, #059669)';
+      }, 2000);
+      
+      // Remove this line in production to actually submit the form
+      // e.preventDefault();
+    });
+
+    // Add floating effect to card
+    const card = document.querySelector('.card');
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      
+      // Subtle tilt effect
+      card.style.transform = `perspective(1000px) rotateY(${x * 5 - 2.5}deg) rotateX(${y * -5 + 2.5}deg) translateY(-5px)`;
+    });
+    
+    document.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(-5px)';
+    });
+  </script>
